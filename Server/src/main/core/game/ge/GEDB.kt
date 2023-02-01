@@ -39,18 +39,25 @@ object GEDB {
     }
 
     @JvmStatic fun run(closure: (conn: Connection) -> Unit) {
-        dbRunLock.tryLock(10000L, TimeUnit.MILLISECONDS)
+        try
+        {
+            dbRunLock.tryLock(10000L, TimeUnit.MILLISECONDS)
 
-        connectionRefs++
-        val con = connect()
-        closure.invoke(con)
-        connectionRefs--
+            connectionRefs++
+            val con = connect()
+            closure.invoke(con)
+            connectionRefs--
 
-        if(connectionRefs == 0) {
-            con.close()
+            if(connectionRefs == 0) {
+                con.close()
+            }
+
+            dbRunLock.unlock()
         }
-
-        dbRunLock.unlock()
+        catch(ex:Exception)
+        {
+            
+        }
     }
 
     private fun connect(): Connection
