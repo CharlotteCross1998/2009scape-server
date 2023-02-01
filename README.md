@@ -25,6 +25,11 @@ Please do not report bugs to the original developers regarding code I've modifie
 
 Unlike the original developers, I will accept pull requests that add/change features that aren't in line with the 2009 themed nature of the project, so long as they are in the ethos of runescape. For example, adding a feature that OSRS implements would be accepted. Changing Lumbridge castle the have a backdoor is another example of a change I would accept. Furthermore, because this repo is more about the private server side of things, adding in commands to cheat is totally ok, as it's up to the users whether or not they want to use said cheats.
 
+## Changes Made
+
+- Removed heartbeat. This caused crashes when it failed, and private servers don't need a heartbeat.
+- Workaround fix for the server crashing when 2 bots interacting with the Grand Exchange at the same time. 
+
 ## Table of Contents
 
 * [Live Server Information](#live-server-information)
