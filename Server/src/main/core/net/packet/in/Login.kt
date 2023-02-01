@@ -132,15 +132,7 @@ object Login {
 
         val player = Player(details)
         PlayerMonitor.log(player, LogType.IP_LOG, details.ipAddress)
-        if (canBypassAccountLimitCheck(player)) {
-            proceedWithAcceptableLogin(session, player, opcode)
-        } else {
-            if (checkAccountLimit(details.ipAddress, details.username)) {
-                proceedWithAcceptableLogin(session, player, opcode)
-            } else {
-                session.write(AuthResponse.LoginLimitExceeded)
-            }
-        }
+        proceedWithAcceptableLogin(session, player, opcode)
     }
 
     private fun canBypassAccountLimitCheck(player: Player): Boolean {
