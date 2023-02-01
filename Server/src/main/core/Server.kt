@@ -30,8 +30,6 @@ object Server {
     @JvmField
     var startTime: Long = 0
 
-    var lastHeartbeat = System.currentTimeMillis()
-
     @JvmStatic
     var running = false
 
@@ -89,11 +87,6 @@ object Server {
             }
         }
 
-    }
-
-    @JvmStatic
-    fun heartbeat() {
-        lastHeartbeat = System.currentTimeMillis()
     }
 
     fun printCommands(){

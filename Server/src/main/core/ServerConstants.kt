@@ -155,10 +155,7 @@ class ServerConstants {
 		var RULES_AND_INFO_ENABLED = true
 
 		@JvmField
-		var WATCHDOG_ENABLED = true
-
-		@JvmField
-		var I_AM_A_CHEATER = false
+		var I_AM_A_CHEATER = true
 
 		//location names for the ::to command.
 		val TELEPORT_DESTINATIONS = arrayOf(

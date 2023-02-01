@@ -33,7 +33,6 @@ class MajorUpdateWorker {
         Thread.sleep(600L)
         while (running) {
             val start = System.currentTimeMillis()
-            Server.heartbeat()
 
             handleTickActions()
 
