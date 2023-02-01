@@ -16,7 +16,7 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Allows teleporting by location name
          */
-        define("to", Privilege.ADMIN, "::to <lt>String<gt>", "See ServerConstants.TELEPORT_DESTINATIONS"){player,args ->
+        define("tp", Privilege.ADMIN, "::tp <lt>String<gt>", "See ServerConstants.TELEPORT_DESTINATIONS"){player,args ->
             var destination: Location? = null
             val place = args.slice(1 until args.size).joinToString(" ")
             for (destinations in ServerConstants.TELEPORT_DESTINATIONS) {
