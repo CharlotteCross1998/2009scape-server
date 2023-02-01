@@ -16,7 +16,14 @@
     <a href="https://discord.gg/43YPGND">Discord Invite</a>
     ·    <a href="https://gitlab.com/2009scape/2009scape/-/issues">Report Bug</a>
   </p>
-<h3>NOTE: Bug reports and support are only accepted by/offered to players of our live hosted server. We will not provide support to those running their own copies.</h3>
+
+## Charlotte Edit
+
+This repo contains a couple of edits not neccessary for the live server but for those who wish to host their own private server.
+
+Please do not report bugs to the original developers regarding code I've modified.
+
+Unlike the original developers, I will accept pull requests that add/change features that aren't in line with the 2009 themed nature of the project, so long as they are in the ethos of runescape. For example, adding a feature that OSRS implements would be accepted. Changing Lumbridge castle the have a backdoor is another example of a change I would accept. Furthermore, because this repo is more about the private server side of things, adding in commands to cheat is totally ok, as it's up to the users whether or not they want to use said cheats.
 
 ## Table of Contents
 
@@ -60,70 +67,29 @@ In the current climate of RuneScape Private Servers in general, we believe it's 
 
 ## Contributing
 
-**Note: All merge requests MUST be made using the defaut MR template. Merge requests that do not use this template will not be accepted.**
+Contributions can be made in the form of a bug report, as long as it's my code that's broke and not the original developers. For that, please report it to them.
 
-**Note: All new contributions MUST be made in Kotlin unless you are updating or fixing a bug in legacy code. More information on Kotlin can be found [here](https://kotlinlang.org/).**
-
-There are many ways everyone can contribute! From the most seasoned programmers to those who do not have the most remote clue how code works! Below are some things that can always use some love from the community.
-
-* **Content Testers**: I'm putting this one up top because of its importance. We, the contributors and developers, aren't perfect. Sometimes, we make mistakes. This is where you come in - If you want a sneak peek at upcoming content, have a knack for breaking things, or just want to contribute to the project without making code changes, you can become a tester! If you are interested in becoming a tester, reach out in the testing channel of the discord. [Why become a tester?](#why-become-a-tester)
-
-
-* **Wiki Editors**: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009Scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. [Click here to go to the wiki](https://cdn.2009scape.org/wiki/doku.php?id=start).
-
-
-* **JSON editors**: We could always use more JSON editors! Please note that JSON editing **must** be done using the [Thanos Tool](https://gitlab.com/2009scape/rs09-thanos-tool/-/jobs/artifacts/master/raw/build/libs/thanostool.jar?job=build).
-
-
-* **Authenticity Auditors**: As a remake, authenticity is central to our core values! We could always use someone to go through the game and create large lists of simple tasks that can be done to bring us closer to the authentic 2009 game! The preferred way to do this is one-area-at-a-time. If you want to see an example of some audits we've done in the past, take a look [here](https://gitlab.com/2009scape/2009scape/-/issues/46).
-
-
-* **Code Contributors**: As a remake, we have massive amounts of content that need to be implemented or corrected. If you know how to program or are willing to learn, this is where you could be extremely helpful! We need everything from quests, to dialogue, to mini-games, to skills that still need to be corrected or implemented. This is perhaps one of the most valuable ways someone could help out the project! If you are interested in developing content, reach out in the development channel of the Discord.
+Contributions also include pull requests. Unlike the original developers, I not only accept but welcome both Java and Kotlin code. 
 
 ## Content Developers: Setting Up the Project.
-### GitLab Setup
-**Note: This allows you to commit changes to the main repo (with approval)! Also, always stay up to date with the most recent updates by pulling into your copy when 2009Scape updates!**
-
-1. Create a GitLab account if you haven't done so already.
-
-2. Follow our Git Basics guide [over on the wiki.](https://gitlab.com/2009scape/2009scape/-/wikis/git-basics)
-
-**If at anytime you have an issue with GitLab please refer to the [GitLab help center](https://gitlab.com/help).**
 
 ### Prerequisites
 
-These are mandatory. If you don't install **all** of these programs **in order** prior to
-the project's setup, things won't work. At all.
-
-*For Windows users* - Turn developer mode on first in Windows developer settings.
-
-* [JDK 11](https://adoptium.net) or the Java SE Development Kit Version 11
-* [IntelliJ IDEA Community](https://www.jetbrains.com/idea/download/)
-
-### SSH setup
-
-1. [Set up a key if you don't have one (ed25519)](https://docs.gitlab.com/ee/user/ssh.html#generate-an-ssh-key-pair)
-2. [Add your public key to your gitlab account](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account)
-3. [Verify you can connect to git@gitlab.com](https://docs.gitlab.com/ee/user/ssh.html#verify-that-you-can-connect)
-
-### Project Setup
-
-1. If you haven't already, make sure to follow our [Git Basics](https://gitlab.com/2009scape/2009scape/-/wikis/git-basics) guide.
-2. Run `git lfs pull` in the 2009scape folder you cloned as part of that guide. This only has to be done once, ever.
-3. Follow our [IntelliJ IDEA Setup Guide](https://gitlab.com/2009scape/2009scape/-/wikis/Setup-for-IntelliJ-IDEA-IDE)
+* [JDK 11] Java SE Development Kit Version 11 - Whilst you can run the server with another version, only 11 works for saving player data as far as I've tested.
 
 ### Running the project
 
-1. If you followed the IntelliJ setup guide, which you probably should have, just use the provided run configuration.
-***Note: If you choose not to use the provided run scripts or IntelliJ, you *must* run `mvn clean` before it will build correctly.***
-
 #### Linux / OSX
+
+Should be as simple as cloning the repository and running `build -g -m`. To build without tests, append the `-q` argument.
 
 Start the game server with the included run script. Use `./run -h` for more info.
 
 #### Windows
 
 Start the game server with `run-server.bat`
+
+Please note that for this repo, Windows support is community orientated as I do not have a Windows device.
 
 ### License
 
