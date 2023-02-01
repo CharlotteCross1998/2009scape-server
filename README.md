@@ -32,9 +32,7 @@ Unlike the original developers, I will accept pull requests that add/change feat
 * [Our Core Values](#our-core-values) 
 * [Contributing](#contributing)
 * [Setup for Content Developers](#content-developers-setting-up-the-project)
-  * [GitLab Setup](#gitlab-setup)
   * [Prerequisites](#prerequisites)
-  * [Project Setup](#project-setup)
   * [Running the project](#running-the-project)
 * [License](#license)
 * [Contact](#contact)
@@ -75,7 +73,7 @@ Contributions also include pull requests. Unlike the original developers, I not 
 
 ### Prerequisites
 
-* [JDK 11] Java SE Development Kit Version 11 - Whilst you can run the server with another version, only 11 works for saving player data as far as I've tested.
+* Java SE Development Kit Version 11 - Whilst you can run the server with another version, only 11 works for saving player data as far as I've tested.
 
 ### Running the project
 
