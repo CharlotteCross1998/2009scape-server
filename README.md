@@ -33,7 +33,6 @@ Unlike the original developers, I will accept pull requests that add/change feat
 - Increased bank space to 800
 - Added server command "say" to send message to all players on server (untested on multiple worlds)
 - Removed rules (may add this back in with a config file for those wanting to run a public server)
-- Removed daily account limit (so you can LAN with more than 3 people and also allow people running on the same VPN to connect to public servers). 
 
 ## Table of Contents
 
