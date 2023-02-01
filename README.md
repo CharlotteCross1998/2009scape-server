@@ -29,6 +29,9 @@ Unlike the original developers, I will accept pull requests that add/change feat
 
 - Removed heartbeat. This caused crashes when it failed, and private servers don't need a heartbeat.
 - Workaround fix for the server crashing when 2 bots interacting with the Grand Exchange at the same time. 
+- Changed the "to" command to "tp"
+- Increased bank space to 800
+- Added server command "say" to send message to all players on server (untested on multiple worlds)
 
 ## Table of Contents
 
