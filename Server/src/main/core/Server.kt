@@ -89,34 +89,6 @@ object Server {
             }
         }
 
-        if (ServerConstants.WATCHDOG_ENABLED) {
-            GlobalScope.launch {
-                delay(20000)
-                while (running) {
-                    if (System.currentTimeMillis() - lastHeartbeat > 7200 && running) {
-                        SystemLogger.logErr(this::class.java, "Triggering reboot due to heartbeat timeout")
-                        SystemLogger.logErr(this::class.java, "Creating thread dump...")
-                        val dump = threadDump(true, true)
-
-                        withContext(Dispatchers.IO) {
-                            FileWriter("latestdump.txt").use {
-
-                                if (dump != null) {
-                                    it.write(dump)
-                                }
-
-                                it.flush()
-                                it.close()
-                            }
-                        }
-
-                        if (!SystemManager.isTerminated())
-                            exitProcess(0)
-                    }
-                    delay(625)
-                }
-            }
-        }
     }
 
     @JvmStatic
