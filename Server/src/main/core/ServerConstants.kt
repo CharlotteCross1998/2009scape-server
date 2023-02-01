@@ -15,9 +15,6 @@ class ServerConstants {
 		var NOAUTH_DEFAULT_ADMIN: Boolean = true
 
         @JvmField
-		var DAILY_ACCOUNT_LIMIT = 3
-
-        @JvmField
 		var REVENANT_POPULATION: Int = 30
 
         @JvmField
@@ -152,12 +149,9 @@ class ServerConstants {
 		var LOG_CUTSCENE = true
 
 		@JvmField
-		var RULES_AND_INFO_ENABLED = true
-
-		@JvmField
 		var I_AM_A_CHEATER = true
 
-		//location names for the ::to command.
+		//location names for the ::tp command.
 		val TELEPORT_DESTINATIONS = arrayOf(
 			arrayOf(Location.create(2974, 4383, 2), "corp", "corporal", "corporeal"),
 			arrayOf(Location.create(2659, 2649, 0), "pc", "pest control", "pest"),
