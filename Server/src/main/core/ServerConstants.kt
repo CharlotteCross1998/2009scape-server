@@ -128,7 +128,7 @@ class ServerConstants {
 		var WRITE_LOGS: Boolean = false
 
 		@JvmField
-		var BANK_SIZE: Int = 496
+		var BANK_SIZE: Int = 800
 
 		@JvmField
 		var BANK_BOOTH_QUICK_OPEN: Boolean = false
