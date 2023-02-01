@@ -85,6 +85,21 @@ object Repository {
     }
 
     /**
+     * Send a message to all players.
+     * @param string The string.
+     * @param icon The icon.
+     */
+    @JvmStatic
+    fun sendMessage(string: String, icon: Int = 12, color: String = "CC6600") {
+        val players: Array<Any> = playerNames.values.toTypedArray()
+        val size = players.size
+        for (i in 0 until size) {
+            val player = players[i] as Player ?: continue
+            player.sendMessage("<img=$icon><col=$color>Server: $string")
+        }
+    }
+
+    /**
      * This is another sendnews method which redirects to the one above.
      * This needs to exist because java fails to recognize default arguments in Kotlin methods....
      * I fucking hate java.
@@ -189,7 +204,7 @@ object Repository {
     fun getPlayerByName(name: String?): Player? {
         return if (name == null) {
             null
-        } else playerNames[name.toLowerCase().replace(" ".toRegex(), "_")]
+        } else playerNames[name.lowercase().replace(" ".toRegex(), "_")]
     }
 
     /**
