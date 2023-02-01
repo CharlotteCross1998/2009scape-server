@@ -13,7 +13,6 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import proto.management.JoinClanRequest
 import core.ServerConstants
-import content.global.handlers.iface.RulesAndInfo
 import core.game.world.GameWorld
 import core.tools.END_DIALOGUE
 import core.worker.ManagementEvents
@@ -176,7 +175,6 @@ class TutorialMagicTutorDialogue(player: Player? = null) : core.game.dialogue.Di
                     player.unhook(TutorialUseWithReceiver)
                     player.unhook(TutorialInteractionReceiver)
                     player.unhook(TutorialButtonReceiver)
-                    RulesAndInfo.openFor(player)
 
                     if (GameWorld.settings!!.enable_default_clan) {
                         player.communication.currentClan = ServerConstants.SERVER_NAME

@@ -26,7 +26,6 @@ import core.api.utils.PlayerCamera
 import content.global.ame.RandomEvents
 import content.region.misthalin.draynor.quest.anma.AnmaCutscene
 import core.game.ge.GrandExchange
-import content.global.handlers.iface.RulesAndInfo
 import content.global.skill.farming.FarmingState
 import content.minigame.fishingtrawler.TrawlerLoot
 import core.tools.SystemLogger
@@ -657,32 +656,6 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 "false" -> player.removeAttribute("allow_admin_aggression")
                 else -> reject(player, usageStr)
 
-            }
-        }
-
-        define("rules", Privilege.STANDARD, "", "Shows the rules."){ player, _ ->
-            RulesAndInfo.setBaseRulesAndInfo(player);
-            player.packetDispatch.sendInterfaceConfig(384, 17, true)
-            openInterface(player, 384)
-        }
-
-        define("confirmrules", Privilege.STANDARD) { player, args ->
-            if(getAttribute(player,"rules:confirmed", false))
-                reject(player, "You have already confirmed the rules.")
-            if(args.size < 2)
-                reject(player, "Usage: ::confirmrules PIN")
-            val pin = args[1].toIntOrNull() ?: (-1).also{ reject(player, "Please enter a valid number.") }
-            if(pin == getAttribute(player, "rules:pin", -1))
-            {
-                player.setAttribute("/save:rules:confirmed", true)
-                player.interfaceManager.close()
-                sendDialogue(player, "Thank you!")
-                player.unlock()
-                player.removeAttribute("rules:pin")
-            }
-            else
-            {
-                sendDialogue(player, "Wrong pin. Try again.")
             }
         }
     }

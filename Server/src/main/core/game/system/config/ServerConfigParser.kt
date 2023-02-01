@@ -117,7 +117,6 @@ object ServerConfigParser {
         ServerConstants.RSDT_DATA_PATH = data.getPath("paths.rare_seed_drop_table_path")
         ServerConstants.ASDT_DATA_PATH = data.getPath("paths.allotment_seed_drop_table_path")
         ServerConstants.SERVER_GE_NAME = data.getString("world.name_ge") ?: ServerConstants.SERVER_NAME
-        ServerConstants.RULES_AND_INFO_ENABLED = data.getBoolean("world.show_rules", true)
         ServerConstants.BOTS_INFLUENCE_PRICE_INDEX = data.getBoolean("world.bots_influence_ge_price", true)
         ServerConstants.PRELOAD_MAP = data.getBoolean("server.preload_map", false)
         ServerConstants.REVENANT_POPULATION = data.getLong("world.revenant_population", 30L).toInt()
