@@ -148,8 +148,7 @@ public final class LoginConfiguration {
             if (item == null) continue;
             InteractionListeners.run(item.getId(), player, item, true);
         }
-        if(ServerConstants.RULES_AND_INFO_ENABLED)
-            RulesAndInfo.openFor(player);
+        
 		/*if (GameWorld.getSettings().isPvp()) {
 			player.getPacketDispatch().sendString("", 226, 1);
 		}*/
