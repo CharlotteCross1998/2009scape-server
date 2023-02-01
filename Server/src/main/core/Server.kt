@@ -82,7 +82,15 @@ object Server {
                     "update" -> SystemManager.flag(SystemState.UPDATING)
                     "help","commands" -> printCommands()
                     "restartworker" -> SystemManager.flag(SystemState.ACTIVE)
-
+                }
+                if(command[0] == 's' && command[1] == 'a' && command[2] == 'y' && command[3] == ' ')
+                {
+                    var message = "";
+                    for(i in 3 until command.length) 
+                    {
+                        message = message + command[i];
+                    }
+                    sayCommand(message)
                 }
             }
         }
@@ -95,6 +103,12 @@ object Server {
         println("update - initiate an update with a countdown visible to players")
         println("help, commands - show this")
         println("restartworker - Reboots the major update worker in case of a travesty.")
+        println("say - Send a message to the server")
+    }
+
+    fun sayCommand(command: String)
+    {
+        Repository.sendMessage(command);
     }
 
     fun autoReconnect() {
