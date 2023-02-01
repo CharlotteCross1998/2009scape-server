@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.rs09</groupId>
+  <artifactId>server</artifactId>
+  <version>1.0.0</version>
+  <properties>
+    <project.mainClassName>core.Server</project.mainClassName>
+    <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+    <kotlin.version>1.6.21</kotlin.version>
+    <kotlin.comipler.jvmTarget>1.6</kotlin.comipler.jvmTarget>
+    <junit.version>5.7.0</junit.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <version>${kotlin.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-reflect</artifactId>
+      <version>1.5.20</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlinx</groupId>
+      <artifactId>kotlinx-coroutines-core-jvm</artifactId>
+      <version>1.4.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.moandjiezana.toml</groupId>
+      <artifactId>toml4j</artifactId>
+      <version>0.7.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.rs09.consts</groupId>
+      <artifactId>ConstLib</artifactId>
+      <version>[1.4.0,)</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.29</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.classgraph</groupId>
+      <artifactId>classgraph</artifactId>
+      <version>4.8.146</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>3.36.0.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.ajalt.mordant</groupId>
+      <artifactId>mordant-jvm</artifactId>
+      <version>2.0.0-beta6</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.errorprone</groupId>
+      <artifactId>error_prone_annotations</artifactId>
+      <version>2.9.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/main</sourceDirectory>
+    <testSourceDirectory>src/test</testSourceDirectory>
+    <plugins>
+
+      <!-- Installs our local dependencies (const/extension libraries) to a local maven repo) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>install-consts</id>
+            <phase>clean</phase>
+            <configuration>
+              <file>${project.basedir}/libs/ConstLib-1.4.jar</file>
+              <repositoryLayout>default</repositoryLayout>
+              <groupId>org.rs09</groupId>
+              <artifactId>consts</artifactId>
+              <version>1.4</version>
+              <packaging>jar</packaging>
+              <generatePom>true</generatePom>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>install-extends</id>
+            <phase>clean</phase>
+            <configuration>
+              <file>${project.basedir}/libs/PrimitiveExtensions-1.0.jar</file>
+              <repositoryLayout>default</repositoryLayout>
+              <groupId>org.rs09</groupId>
+              <artifactId>primextends</artifactId>
+              <version>1.0</version>
+              <packaging>jar</packaging>
+              <generatePom>true</generatePom>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.4.2</version>
+
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest><mainClass>${project.mainClassName}</mainClass></manifest>
+          </archive>
+        </configuration>
+
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+
+      </plugin>
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <version>${kotlin.version}</version>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <sourceDirs>
+                <sourceDir>${project.basedir}/src/main</sourceDir>
+              </sourceDirs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <goals> <goal>test-compile</goal> </goals>
+            <configuration>
+              <sourceDirs>
+                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+              </sourceDirs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.10.1</version>
+        <configuration>
+          <maxmem>1024m</maxmem>
+          <useIncrementalCompilation>false</useIncrementalCompilation>
+		  <compilerArgs>
+			<arg>-XDcompilePolicy=simple</arg>
+			<!-- <arg>-Xplugin:ErrorProne</arg> uncomment when fixing java static analysis errors !-->
+		  </compilerArgs>
+		  <annotationProcessorPaths>
+			<path>
+			  <groupId>com.google.errorprone</groupId>
+			  <artifactId>error_prone_core</artifactId>
+			  <version>2.9.0</version>
+			</path>
+			<!-- Other annotation processors go here.
+
+			If 'annotationProcessorPaths' is set, processors will no longer be
+			discovered on the regular -classpath; see also 'Using Error Prone
+			together with other annotation processors' below. -->
+		  </annotationProcessorPaths>
+        </configuration>
+        <executions>
+          <!-- Replacing default-compile as it is treated specially by maven -->
+          <execution>
+            <id>default-compile</id>
+            <phase>none</phase>
+          </execution>
+          <!-- Replacing default-testCompile as it is treated specially by maven -->
+          <execution>
+            <id>default-testCompile</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>java-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>java-test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <useFile>false</useFile>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+        <version>2.22.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.22.0</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <configuration>
+          <mainClass>core.Server</mainClass>
+        </configuration>
+      </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+                    <!-- This can be run separately with mvn antrun:run@detekt -->
+                    <id>detekt</id>
+                    <phase>verify</phase>
+                    <configuration>
+                        <target name="detekt">
+                            <java taskname="detekt" dir="${basedir}"
+                                  fork="true" 
+                                  failonerror="true"
+                                  classname="io.gitlab.arturbosch.detekt.cli.Main"
+                                  classpathref="maven.plugin.classpath">
+                                <arg value="--input"/>
+                                <arg value="${basedir}/src/main"/>
+                                <arg value="--excludes"/>
+                                <arg value="**/special/package/internal/**"/>
+                                <arg value="--report"/>
+                                <arg value="xml:${basedir}/reports/detekt.xml"/>
+								<arg value="--config"/>
+								<arg value="${basedir}/detekt.yml"/>
+                                <!--
+								<arg value="-b" />
+                                <arg value="${basedir}/reports/baseline.xml"/>
+								-->
+                            </java>
+                        </target>
+                    </configuration>
+                    <goals><goal>run</goal></goals>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>io.gitlab.arturbosch.detekt</groupId>
+                    <artifactId>detekt-cli</artifactId>
+                    <version>1.21.0</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+  </build>
+  <repositories>
+    <repository>
+      <id>maven_central</id>
+      <name>Maven Central</name>
+      <url>https://repo.maven.apache.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/32237206/packages/maven</url>
+    </repository>
+  </repositories>
+  <distributionManagement>
+    <repository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/32237206/packages/maven</url>
+    </repository>
+
+    <snapshotRepository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/32237206/packages/maven</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
